@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MedicalAssurancePolicyData": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Administrator\\OneDrive\\workspaces\\MedicalAssurancePolicyData\\医保政策和招标结果查询系统-202201"
+    }
+  }
+}
