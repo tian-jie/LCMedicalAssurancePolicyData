@@ -178,7 +178,7 @@ namespace MedicalAssurancePolicyData
         /// </summary>
         public string PolicyLinkThree { get; set; }
 
-
+        #endregion
 
 
         public List<MedicalAssurancePolicyDetail> MedicalAssurancePolicyDetails { get; }
