@@ -210,6 +210,19 @@ namespace MedicalAssurancePolicyData
         /// </summary>
         [Description("政策来源")]
         public string PolicyLinkThree { get; set; }
+
+        /// <summary>
+        /// 33 是否热门城市
+        /// </summary>
+        [Description("是否热门城市")]
+        public string IsHot { get; set; }
+
+        /// <summary>
+        /// 热门城市排序
+        /// </summary>
+        [Description("热门城市排序")]
+        public string Order { get; set; }
+
         #endregion
 
 
