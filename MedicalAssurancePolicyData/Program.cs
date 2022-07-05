@@ -19,8 +19,8 @@ namespace MedicalAssurancePolicyData
         static List<NameCodePair> Provinces;
         static List<NameCodePair> Cities;
 
-        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6IjNkOGI0MDc4LWNiZTMtNDY1Ni05NDQ1LWU3NzIyNDBhNDMzNiIsImlhdCI6MTY1MjQzMDU1MSwiZXhwIjoxNjUyNDQ0OTUxfQ.9QpIV3e253qLEgXPJEkxufIvsZHQaiYSrgIfIS5Nuuo";
-        static string _cookies = "connect.sid=s%3AW2K6T-2IwQTtQXAgq6XwqnmNKYe8qQAS.OLUfhTtx3eK4pVLvItXxUWd6eWK5Eo8qHd6BfgAGgxE; passport-aad.1652428454837.dca97261b6b899957e21816b5bc473494bb83657bd564f2b06887b2b8f1f4730c66b0862594499affce57c7a452a3666cd645f204fe86e1023216dd868b783696efc2a228e67d39c9fac1e3b4e51f031854bd9c74f0560.6102863c817b095343e22e3dc7174982=0";
+        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6IjFjYWJiNzVmLTM1OTgtNDZmMC04OTQ3LTc0YTI1ZTA1M2U0NCIsImlhdCI6MTY1NjEyNzEyNCwiZXhwIjoxNjU2MTQxNTI0fQ.zG04Z6WOclQnJhfIpcYD9rJ142kiooNXnfd45olKAI4";
+        static string _cookies = "connect.sid=s%3AvTZq9AXnPN4Gw-vh9iqXit67kozU8sPv.nklcGY7hUmWjk28k6JnHiDJ%2BYgO18ZXxKuJAu%2Fg30G8";
         static string _host = "https://ipatientadmin.qa.lilly.cn";
 
         //static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ1LCJ1c2VyIjp7ImlkIjo0NSwiY3JlYXRlZFVzZXJJZCI6NCwiY3JlYXRlZERhdGUiOiIyMDIxLTA3LTE0VDA1OjMxOjM2Ljk5N1oiLCJtb2RpZmllZFVzZXJJZCI6bnVsbCwibW9kaWZpZWREYXRlIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJ2ZXJzaW9uTnVtYmVyIjoxLCJ1c2VybmFtZSI6IkMyMTczNTUiLCJlbWFpbCI6InRpYW5famllQG5ldHdvcmsubGlsbHkuY24iLCJyZWFsbmFtZSI6IkppZSBUaWFuIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6ImIyOTRkOWVlLTU5ZjctNDIwZi04ZTllLWFjOTk0OTRiNDliYSIsImlhdCI6MTY1MjQzMjAwOSwiZXhwIjoxNjUyNDUzNjA5fQ.Wgz8yfTxHQEM24GGZjMr-ZKNiROp_do7VC5DMmo8FKk";
@@ -33,8 +33,23 @@ namespace MedicalAssurancePolicyData
 
             //ReadNewExcelAndParseData(args[0]);
             ReadNewExcelAndParseData("/Users/tianjie/workspaces/LCMedicalAssurancePolicyData/MedicalAssurancePolicyData/data/20220513/DrugReimbursement.xlsx");
+            
+
+
         }
 
+        private static List<Item> GetCurrentList(string product)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
+            httpClient.DefaultRequestHeaders.Add("cookie", _cookies);
+
+            var result = httpClient.GetAsync($"https://ipatientadmin.qa.lilly.cn/api/v1/wechatMedical/medicalInsurancePolicy/manage/andCount?catalog_type={product}&keyword=&pageNumber=1&pageSize=100000&province_code=&city_code=&type_code=&onlyHot=0&timestamp=1656127194760&accountid=1").Result;
+            var html = result.Content.ReadAsStringAsync().Result;
+            var maResponse = JsonConvert.DeserializeObject<MedicalAssuranceHtmlResponse>(html);
+            var maData = maResponse.content.res;
+            return maData;
+        }
 
         private static void ReadNewExcelAndParseData(string folder)
         {
@@ -42,15 +57,15 @@ namespace MedicalAssurancePolicyData
             List<MedicalAssurancePolicy> medicalAssurancePolicies;
 
             var filename = "all.json";
-            if (File.Exists(filename))
-            {
-                using (StreamReader sr = new StreamReader(filename))
-                {
-                    var str = sr.ReadToEnd();
-                    medicalAssurancePolicies = JsonConvert.DeserializeObject<List<MedicalAssurancePolicy>>(str);
-                }
-            }
-            else
+            //if (File.Exists(filename))
+            //{
+            //    using (StreamReader sr = new StreamReader(filename))
+            //    {
+            //        var str = sr.ReadToEnd();
+            //        medicalAssurancePolicies = JsonConvert.DeserializeObject<List<MedicalAssurancePolicy>>(str);
+            //    }
+            //}
+            //else
             {
                 medicalAssurancePolicies = AnalyzeNewExcels(folder);
             }
@@ -66,6 +81,7 @@ namespace MedicalAssurancePolicyData
                 var str = sr.ReadToEnd();
                 Cities = JsonConvert.DeserializeObject<List<NameCodePair>>(str);
             }
+
 
             // 处理完了，然后就可以整理成需要的内容了
             // TODO: 处理html内容，然后直接post
@@ -84,6 +100,10 @@ namespace MedicalAssurancePolicyData
 
         private static void PostContentByProduct(List<MedicalAssurancePolicy> medicalAssurancePolicies, string productName, string productCode, string isHot, string typeCode)
         {
+            // TODO: 获取已有的数据，对比excel的数据，如果有不相同的，则post更新
+            var currentMA = GetCurrentList(productCode);
+
+
             foreach (var policy in medicalAssurancePolicies.Where(a => a.ProductName == productName))
             {
                 var html = CreateNewMedicalAssurancePolicyContent(policy);
@@ -102,26 +122,62 @@ namespace MedicalAssurancePolicyData
                     // 做HttpClient去post
                     Console.WriteLine(" Simulate POST: {0} - {1}, HTML", province, city);
 
-                    var url = _host + "/api/v1/wechatMedical/ueditor?accountid=1";
                     HttpClient httpClient = new HttpClient();
                     html = html.Replace("\"", "'").Replace("\n", "");
-                    isHot = string.IsNullOrEmpty(isHot)?(policy.IsHot == "是" ? "true" : "false"):isHot;
-                    httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
-                    if (policy.Order == "-")
-                    {
-                        policy.Order = "0";
-                    }
-                    var postString = $"{{\"cmd\":\"MEDICAL_INSURANCE_POLICY\",\"data\":{{\"catalog_type\":\"{productCode}\",\"province_code\":\"{provinceCode}\",\"city_code\":\"{cityCode}\",\"content\":\"{html}\",\"is_hot\":{isHot},\"type_code\":\"{typeCode}\",\"order\":{policy.Order}}}}}";
-                    postString = postString.Replace("\\", "\\\\");
-                    var stringContent = new StringContent(postString, Encoding.UTF8, "application/json");
-                    stringContent.Headers.Add("cookie", _cookies);
-                    //stringContent.Headers.Add("Content-Type", "application/json");
-                    var response = httpClient.PostAsync(url, stringContent).Result;
-                    var result = response.Content.ReadAsStringAsync().Result;
 
-                    if(response.StatusCode != System.Net.HttpStatusCode.Created)
+                    // 确认一下html跟原始的是否相同
+                    var ma = currentMA.FirstOrDefault(a => a.province_code == provinceCode.ToString() && a.city_code == cityCode.ToString());
+                    if (ma == null)
                     {
-                        Console.WriteLine(" post failed: {0} - {1}", province, city);
+                        // 不存在就添加
+                        isHot = string.IsNullOrEmpty(isHot) ? (policy.IsHot == "是" ? "true" : "false") : isHot;
+                        httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
+                        if (policy.Order == "-")
+                        {
+                            policy.Order = "0";
+                        }
+                        var postString = $"{{\"cmd\":\"MEDICAL_INSURANCE_POLICY\",\"data\":{{\"catalog_type\":\"{productCode}\",\"province_code\":\"{provinceCode}\",\"city_code\":\"{cityCode}\",\"content\":\"{html}\",\"is_hot\":{isHot},\"type_code\":\"{typeCode}\",\"order\":{policy.Order}}}}}";
+                        postString = postString.Replace("\\", "\\\\");
+                        var stringContent = new StringContent(postString, Encoding.UTF8, "application/json");
+                        stringContent.Headers.Add("cookie", _cookies);
+                        //stringContent.Headers.Add("Content-Type", "application/json");
+                        var url = _host + "/api/v1/wechatMedical/ueditor?accountid=1";
+                        var response = httpClient.PostAsync(url, stringContent).Result;
+                        var result = response.Content.ReadAsStringAsync().Result;
+
+                        if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                        {
+                            Console.WriteLine(" post failed: {0} - {1}", province, city);
+                        }
+                    }else
+                    {
+                        // 如果html相同，则跳过，html不同的话，就修改。
+                        if(ma.content == html)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            isHot = string.IsNullOrEmpty(isHot) ? (policy.IsHot == "是" ? "true" : "false") : isHot;
+                            httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
+                            if (policy.Order == "-")
+                            {
+                                policy.Order = "0";
+                            }
+                            var postString = $"{{\"cmd\":\"MEDICAL_INSURANCE_POLICY\",\"data\":{{\"catalog_type\":\"{productCode}\",\"province_code\":\"{provinceCode}\",\"city_code\":\"{cityCode}\",\"content\":\"{html}\",\"is_hot\":{isHot},\"type_code\":\"{typeCode}\",\"order\":{policy.Order}}}}}";
+                            postString = postString.Replace("\\", "\\\\");
+                            var stringContent = new StringContent(postString, Encoding.UTF8, "application/json");
+                            stringContent.Headers.Add("cookie", _cookies);
+                            //stringContent.Headers.Add("Content-Type", "application/json");
+                            var url = $"{_host}/api/v1/wechatMedical/ueditor/{ma.id}?accountid=1";
+                            var response = httpClient.PostAsync(url, stringContent).Result;
+                            var result = response.Content.ReadAsStringAsync().Result;
+
+                            if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                            {
+                                Console.WriteLine(" post failed: {0} - {1}", province, city);
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
