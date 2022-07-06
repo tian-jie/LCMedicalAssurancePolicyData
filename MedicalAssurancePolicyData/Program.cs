@@ -19,8 +19,8 @@ namespace MedicalAssurancePolicyData
         static List<NameCodePair> Provinces;
         static List<NameCodePair> Cities;
 
-        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6IjFjYWJiNzVmLTM1OTgtNDZmMC04OTQ3LTc0YTI1ZTA1M2U0NCIsImlhdCI6MTY1NjEyNzEyNCwiZXhwIjoxNjU2MTQxNTI0fQ.zG04Z6WOclQnJhfIpcYD9rJ142kiooNXnfd45olKAI4";
-        static string _cookies = "connect.sid=s%3AvTZq9AXnPN4Gw-vh9iqXit67kozU8sPv.nklcGY7hUmWjk28k6JnHiDJ%2BYgO18ZXxKuJAu%2Fg30G8";
+        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6IjNjZTZiOTE2LTc0NDctNDBkYy05YzBjLTQyMTUzZjk2YWI0ZiIsImlhdCI6MTY1NzEwNDcwNSwiZXhwIjoxNjU3MTE5MTA1fQ.VcmHfE855xMslPXjDpmn-NzNgIMgkrKg2iFXWtp5RiY";
+        static string _cookies = "connect.sid=s:VRfmIyZNXZUC5McMF-pDVG8rZ1wpUcbz.jj5f+2IQeVTHFXiUhF4+Me8ksl8tdslOmTdzru7xXI8; passport-aad.1657104609071.dca97261b6b899957e219b2e61ef645648a41a5ab27d591506a27e398f2c55519d160d674a70f9e7a8cb7c7a452a3666cd645f204ffd6a13101849fd4587bb0f07f12307ad69fbcaa19337141960df34c311febc480560.420ddb7043f972231effe966527fa1f9=0";
         static string _host = "https://ipatientadmin.qa.lilly.cn";
 
         //static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ1LCJ1c2VyIjp7ImlkIjo0NSwiY3JlYXRlZFVzZXJJZCI6NCwiY3JlYXRlZERhdGUiOiIyMDIxLTA3LTE0VDA1OjMxOjM2Ljk5N1oiLCJtb2RpZmllZFVzZXJJZCI6bnVsbCwibW9kaWZpZWREYXRlIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJ2ZXJzaW9uTnVtYmVyIjoxLCJ1c2VybmFtZSI6IkMyMTczNTUiLCJlbWFpbCI6InRpYW5famllQG5ldHdvcmsubGlsbHkuY24iLCJyZWFsbmFtZSI6IkppZSBUaWFuIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6ImIyOTRkOWVlLTU5ZjctNDIwZi04ZTllLWFjOTk0OTRiNDliYSIsImlhdCI6MTY1MjQzMjAwOSwiZXhwIjoxNjUyNDUzNjA5fQ.Wgz8yfTxHQEM24GGZjMr-ZKNiROp_do7VC5DMmo8FKk";
@@ -32,19 +32,20 @@ namespace MedicalAssurancePolicyData
             Console.WriteLine("Hello World!");
 
             //ReadNewExcelAndParseData(args[0]);
-            ReadNewExcelAndParseData("/Users/tianjie/workspaces/LCMedicalAssurancePolicyData/MedicalAssurancePolicyData/data/20220513/DrugReimbursement.xlsx");
-            
-
-
+            ReadNewExcelAndParseDataV2("1.xlsx");
         }
 
         private static List<Item> GetCurrentList(string product)
         {
             HttpClient httpClient = new HttpClient();
+            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _authorization.Substring(7));
             httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
-            httpClient.DefaultRequestHeaders.Add("cookie", _cookies);
-
-            var result = httpClient.GetAsync($"https://ipatientadmin.qa.lilly.cn/api/v1/wechatMedical/medicalInsurancePolicy/manage/andCount?catalog_type={product}&keyword=&pageNumber=1&pageSize=100000&province_code=&city_code=&type_code=&onlyHot=0&timestamp=1656127194760&accountid=1").Result;
+            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/4.0 (compatible; MSIE Version; Operating System)");
+            var url = $"https://ipatientadmin.qa.lilly.cn/api/v1/wechatMedical/medicalInsurancePolicy/manage/andCount?catalog_type={product}&keyword=&pageNumber=1&pageSize=100000&province_code=&city_code=&type_code=&onlyHot=0&timestamp={(DateTime.Now - new DateTime(1970, 1, 1)).Ticks / 10000}&accountid=1";
+            var message = new HttpRequestMessage(HttpMethod.Get, url);
+            message.Headers.Add("cookie", _cookies);
+            var result = httpClient.Send(message);
+            //var result = httpClient.GetAsync(url).Result;
             var html = result.Content.ReadAsStringAsync().Result;
             var maResponse = JsonConvert.DeserializeObject<MedicalAssuranceHtmlResponse>(html);
             var maData = maResponse.content.res;
@@ -87,7 +88,54 @@ namespace MedicalAssurancePolicyData
             // TODO: 处理html内容，然后直接post
             //Console.WriteLine("Deleting Olumiant contents....");
             //DeleteAll("Olumiant", "normal");
-            //PostContentByProduct(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
+            PostContentByProduct(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
+            //Console.WriteLine("Deleting Taltz contents....");
+            //DeleteAll("Taltz", "normal");
+            //PostContentByProduct(medicalAssurancePolicies, "拓咨", "Taltz", "", "normal");
+
+            //Console.WriteLine("Deleting Ve contents....");
+            //DeleteAll("Verzenios", "countryHealthInsurance");
+            //PostContentByProduct(medicalAssurancePolicies, "唯择", "Verzenios", "true", "countryHealthInsurance");
+
+        }
+
+        private static void ReadNewExcelAndParseDataV2(string folder)
+        {
+            // 打开某个目录
+            List<MedicalAssurancePolicyV2> medicalAssurancePolicies;
+
+            var filename = "all.json";
+            //if (File.Exists(filename))
+            //{
+            //    using (StreamReader sr = new StreamReader(filename))
+            //    {
+            //        var str = sr.ReadToEnd();
+            //        medicalAssurancePolicies = JsonConvert.DeserializeObject<List<MedicalAssurancePolicy>>(str);
+            //    }
+            //}
+            //else
+            {
+                medicalAssurancePolicies = AnalyzeNewExcelsV2(folder);
+            }
+
+            using (StreamReader sr = new StreamReader("province.json"))
+            {
+                var str = sr.ReadToEnd();
+                Provinces = JsonConvert.DeserializeObject<List<NameCodePair>>(str);
+            }
+
+            using (StreamReader sr = new StreamReader("city.json"))
+            {
+                var str = sr.ReadToEnd();
+                Cities = JsonConvert.DeserializeObject<List<NameCodePair>>(str);
+            }
+
+
+            // 处理完了，然后就可以整理成需要的内容了
+            // TODO: 处理html内容，然后直接post
+            //Console.WriteLine("Deleting Olumiant contents....");
+            //DeleteAll("Olumiant", "normal");
+            PostContentByProductV2(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
             //Console.WriteLine("Deleting Taltz contents....");
             //DeleteAll("Taltz", "normal");
             //PostContentByProduct(medicalAssurancePolicies, "拓咨", "Taltz", "", "normal");
@@ -100,9 +148,8 @@ namespace MedicalAssurancePolicyData
 
         private static void PostContentByProduct(List<MedicalAssurancePolicy> medicalAssurancePolicies, string productName, string productCode, string isHot, string typeCode)
         {
-            // TODO: 获取已有的数据，对比excel的数据，如果有不相同的，则post更新
+            // 获取已有的数据，对比excel的数据，如果有不相同的，则post更新
             var currentMA = GetCurrentList(productCode);
-
 
             foreach (var policy in medicalAssurancePolicies.Where(a => a.ProductName == productName))
             {
@@ -149,10 +196,11 @@ namespace MedicalAssurancePolicyData
                         {
                             Console.WriteLine(" post failed: {0} - {1}", province, city);
                         }
-                    }else
+                    }
+                    else
                     {
                         // 如果html相同，则跳过，html不同的话，就修改。
-                        if(ma.content == html)
+                        if (ma.content == html)
                         {
                             continue;
                         }
@@ -286,10 +334,208 @@ namespace MedicalAssurancePolicyData
 
             return medicalAssurancePolicies;
         }
+        private static void PostContentByProductV2(List<MedicalAssurancePolicyV2> medicalAssurancePolicies, string productName, string productCode, string isHot, string typeCode)
+        {
+            // 获取已有的数据，对比excel的数据，如果有不相同的，则post更新
+            var currentMA = GetCurrentList(productCode);
+
+            foreach (var policy in medicalAssurancePolicies.Where(a => a.Product == productName).GroupBy(a => new { a.Province, a.City, a.IsMVP }))
+            {
+                var province = policy.Key.Province;
+                var city = policy.Key.City;
+                var html = "";
+                var policyOrder = "-";
+                foreach (var p in policy)
+                {
+                    html += p.ToHtml();
+                    html += "<br/>";
+                    policyOrder = p.Order;
+                }
+
+                if (string.IsNullOrEmpty(province) || string.IsNullOrEmpty(city))
+                {
+                    Console.WriteLine(" post failed: {0} - {1}, province or city cannot be empty.", province, city);
+                    continue;
+                }
+
+                var provinceCode = -1;
+                var cityCode = -1;
+                try
+                {
+                    provinceCode = Provinces.FirstOrDefault(a => a.Name == province).Code;
+                    cityCode = Cities.FirstOrDefault(a => a.Name == city).Code;
+                }
+                catch
+                {
+                    Console.WriteLine(" post failed: {0} - {1}, province or city not found.", province, city);
+                    continue;
+                }
+
+                try
+                {
+
+                    // 做HttpClient去post
+                    Console.Write(" Simulate POST: {0} - {1}, HTML ... ", province, city);
+
+                    HttpClient httpClient = new HttpClient();
+                    html = html.Replace("\"", "'");
+
+                    // 确认一下html跟原始的是否相同
+                    var ma = currentMA.FirstOrDefault(a => a.province_code == provinceCode.ToString() && a.city_code == cityCode.ToString());
+                    if (ma == null)
+                    {
+                        Console.Write("new, inserting...");
+                        // 不存在就添加
+                        isHot = policy.Key.IsMVP ? "true" : "false";
+                        httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
+                        if (policyOrder == "-")
+                        {
+                            policyOrder = "0";
+                        }
+                        var postString = $"{{\"cmd\":\"MEDICAL_INSURANCE_POLICY\",\"data\":{{\"catalog_type\":\"{productCode}\",\"province_code\":\"{provinceCode}\",\"city_code\":\"{cityCode}\",\"content\":\"{html}\",\"is_hot\":{isHot},\"type_code\":\"{typeCode}\",\"order\":{policyOrder}}}}}";
+                        postString = postString.Replace("\\", "\\\\");
+                        var stringContent = new StringContent(postString, Encoding.UTF8, "application/json");
+                        stringContent.Headers.Add("cookie", _cookies);
+                        //stringContent.Headers.Add("Content-Type", "application/json");
+                        var url = _host + "/api/v1/wechatMedical/ueditor?accountid=1";
+                        var response = httpClient.PostAsync(url, stringContent).Result;
+                        var result = response.Content.ReadAsStringAsync().Result;
+
+                        if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                        {
+                            Console.WriteLine(" post failed: {0} - {1}", province, city);
+                        }
+                    }
+                    else
+                    {
+                        // 如果html相同，则跳过，html不同的话，就修改。
+                        if (ma.content == html)
+                        {
+                            Console.Write("same, skipping");
+                            Console.WriteLine();
+                            continue;
+                        }
+                        else
+                        {
+                            Console.Write("different, updating...");
+
+                            isHot = policy.Key.IsMVP ? "true" : "false";
+                            httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
+                            if (policyOrder == "-")
+                            {
+                                policyOrder = "0";
+                            }
+                            var postString = $"{{\"cmd\":\"MEDICAL_INSURANCE_POLICY\",\"data\":{{\"catalog_type\":\"{productCode}\",\"province_code\":\"{provinceCode}\",\"city_code\":\"{cityCode}\",\"content\":\"{html}\",\"is_hot\":{isHot},\"type_code\":\"{typeCode}\",\"order\":{policyOrder}}}}}";
+                            postString = postString.Replace("\\", "\\\\");
+                            var stringContent = new StringContent(postString, Encoding.UTF8, "application/json");
+                            stringContent.Headers.Add("cookie", _cookies);
+                            //stringContent.Headers.Add("Content-Type", "application/json");
+                            var url = $"{_host}/api/v1/wechatMedical/ueditor/{ma.id}?accountid=1";
+                            var response = httpClient.PutAsync(url, stringContent).Result;
+                            var result = response.Content.ReadAsStringAsync().Result;
+
+                            if (response.StatusCode != System.Net.HttpStatusCode.Created
+                                && response.StatusCode != System.Net.HttpStatusCode.Accepted
+                                && response.StatusCode != System.Net.HttpStatusCode.OK)
+                            {
+                                Console.WriteLine(" post failed: {0} - {1}", province, city);
+                            }
+                            Console.WriteLine();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // do nothing
+                    Console.WriteLine(" Exceptions: {0} - {1}, {2}", province, city, ex.Message);
+                    continue;
+                }
+            }
+        }
+
+        private static List<MedicalAssurancePolicyV2> AnalyzeNewExcelsV2(string filename)
+        {
+            List<MedicalAssurancePolicyV2> medicalAssurancePolicies = new List<MedicalAssurancePolicyV2>();
+
+            // 开始处理数据，读取所有数据，最后再过滤不同品牌
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            {
+                var excelFile = new XSSFWorkbook(fs);
+                var sheet = excelFile.GetSheetAt(0);
+                // 忽略tab的名字，到表格里找对应的省市
+                // Console.WriteLine("  - " + sheet.SheetName);
+
+                // 第一行数据
+                var firstRow = sheet.GetRow(0);
+                var province = "";
+                var city = "";
+                for (var rowNumber = 3; rowNumber < 10000; rowNumber++)
+                {
+                    IRow row = null;
+                    try
+                    {
+                        row = sheet.GetRow(rowNumber);
+                        // 判断文件结束
+                        if (row == null || String.IsNullOrEmpty(row.Cells[1].StringCellValue))
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        break;
+                    }
+
+                    // 每一行，数据
+                    var medicalAssurancePolicy = new MedicalAssurancePolicyV2();
+
+                    try
+                    {
+                        medicalAssurancePolicy.Order = GetCellValue(row, 0);
+                        medicalAssurancePolicy.Product = GetCellValue(row, 1);
+                        medicalAssurancePolicy.Region = GetCellValue(row, 2);
+                        medicalAssurancePolicy.Province = GetCellValue(row, 3);
+                        medicalAssurancePolicy.City = GetCellValue(row, 4);
+                        medicalAssurancePolicy.IsMVP = GetCellValue(row, 5) == "Y" ? true : false;
+                        medicalAssurancePolicy.InsuranceCitizenType = GetCellValue(row, 6);
+                        medicalAssurancePolicy.InsuranceType = GetCellValue(row, 7);
+                        medicalAssurancePolicy.HospitalClassification = GetCellValue(row, 8);
+                        medicalAssurancePolicy.ProductPolicyType_Standard = GetCellValue(row, 9);
+                        medicalAssurancePolicy.ProductPolicyType_Actual = GetCellValue(row, 10);
+                        medicalAssurancePolicy.SelfPayment = GetCellPercentageValue(row, 11);
+                        medicalAssurancePolicy.DeductibleAmount = GetCellValue(row, 12);
+                        medicalAssurancePolicy.ReimbersmentRate = GetCellPercentageValue(row, 13);
+                        medicalAssurancePolicy.ReimbersmentLimit = GetCellValue(row, 14);
+                        medicalAssurancePolicy.Memo = GetCellValue(row, 15);
+                        medicalAssurancePolicy.HospitalizationReimbursementTreatment = GetCellValue(row, 16);
+
+                        province = medicalAssurancePolicy.Province;
+                        city = medicalAssurancePolicy.City;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("  Unexpected Exception at line {0}: {1}", rowNumber, ex.Message);
+                    }
+                    medicalAssurancePolicies.Add(medicalAssurancePolicy);
+                }
+
+            }
+
+
+            // 直接序列化下来，不要每次处理这么多文件了
+            var str = JsonConvert.SerializeObject(medicalAssurancePolicies);
+            using (StreamWriter sw = new StreamWriter("all.json"))
+            {
+                sw.Write(str);
+            }
+
+            return medicalAssurancePolicies;
+        }
+
 
         private static string GetCellPercentageValue(IRow row, int cellNumber)
         {
-            if(row.Cells[cellNumber].CellType == CellType.Numeric)
+            if (row.Cells[cellNumber].CellType == CellType.Numeric)
             {
                 return row.Cells[cellNumber].NumericCellValue * 100 + "%";
             }
@@ -317,13 +563,6 @@ namespace MedicalAssurancePolicyData
             {
                 return row.Cells[cellNumber].NumericCellValue.ToString();
             }
-        }
-
-        private static string GetPropertyDescription(PropertyInfo[] properties, string propertyName)
-        {
-            var property = properties.FirstOrDefault(a => a.Name == propertyName);
-            object[] objs = property.GetCustomAttributes(typeof(DescriptionAttribute), true);
-            return ((DescriptionAttribute)objs[0]).Description;
         }
 
         private static string CreateNewMedicalAssurancePolicyContent(MedicalAssurancePolicy policy)
@@ -375,7 +614,6 @@ namespace MedicalAssurancePolicyData
             return html;
         }
 
-
         private static void DeleteAll(string product, string typeCode)
         {
             while (true)
@@ -386,7 +624,7 @@ namespace MedicalAssurancePolicyData
                 httpClient.DefaultRequestHeaders.Add("authorization", _authorization);
                 var message = new HttpRequestMessage(HttpMethod.Get, url);
                 message.Headers.Add("cookie", _cookies);
-                message.Headers.Referrer = new Uri(_host+"/wechat/wechatManage/medicalInsurancePolicy?accountManageId=1");
+                message.Headers.Referrer = new Uri(_host + "/wechat/wechatManage/medicalInsurancePolicy?accountManageId=1");
                 //message.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 
@@ -417,6 +655,11 @@ namespace MedicalAssurancePolicyData
             var response = httpClient.SendAsync(message).Result;
             var result = response.Content.ReadAsStringAsync().Result;
         }
-
+        private static string GetPropertyDescription(PropertyInfo[] properties, string propertyName)
+        {
+            var property = properties.FirstOrDefault(a => a.Name == propertyName);
+            object[] objs = property.GetCustomAttributes(typeof(DescriptionAttribute), true);
+            return ((DescriptionAttribute)objs[0]).Description;
+        }
     }
 }
