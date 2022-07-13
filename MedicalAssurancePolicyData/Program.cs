@@ -19,8 +19,8 @@ namespace MedicalAssurancePolicyData
         static List<NameCodePair> Provinces;
         static List<NameCodePair> Cities;
 
-        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6IjNjZTZiOTE2LTc0NDctNDBkYy05YzBjLTQyMTUzZjk2YWI0ZiIsImlhdCI6MTY1NzEwNDcwNSwiZXhwIjoxNjU3MTE5MTA1fQ.VcmHfE855xMslPXjDpmn-NzNgIMgkrKg2iFXWtp5RiY";
-        static string _cookies = "connect.sid=s:VRfmIyZNXZUC5McMF-pDVG8rZ1wpUcbz.jj5f+2IQeVTHFXiUhF4+Me8ksl8tdslOmTdzru7xXI8; passport-aad.1657104609071.dca97261b6b899957e219b2e61ef645648a41a5ab27d591506a27e398f2c55519d160d674a70f9e7a8cb7c7a452a3666cd645f204ffd6a13101849fd4587bb0f07f12307ad69fbcaa19337141960df34c311febc480560.420ddb7043f972231effe966527fa1f9=0";
+        static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3LCJ1c2VyIjp7ImlkIjo1NywiY3JlYXRlZFVzZXJJZCI6NDgsImNyZWF0ZWREYXRlIjoiMjAyMi0wMS0xOVQwMTozMzo0Ny40NjdaIiwibW9kaWZpZWRVc2VySWQiOm51bGwsIm1vZGlmaWVkRGF0ZSI6bnVsbCwiaXNEZWxldGVkIjpmYWxzZSwidmVyc2lvbk51bWJlciI6MSwidXNlcm5hbWUiOiJDMjE3MzU1IiwiZW1haWwiOiJ0aWFuX2ppZUBuZXR3b3JrLmxpbGx5LmNuIiwicmVhbG5hbWUiOiJUaWFuSmllIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6ImNiNjY1YzM1LTdkMjQtNDg2OS1hZDIxLTQ5OWYzNTE3NmRmNyIsImlhdCI6MTY1NzY4NDIxOSwiZXhwIjoxNjU3Njk4NjE5fQ.pCv-KP3VmoKqZSNtl_Oe_LMqt_CPB6WUGPPmpfq4DpI";
+        static string _cookies = "connect.sid=s%3ALGLI_l-J4dwmtQg9z7lOVurz9mXXE4Dp.7wYlzUSk2T9shp9lJsB7s19yTWUGpr9sLuI4EEkO%2BU4";
         static string _host = "https://ipatientadmin.qa.lilly.cn";
 
         //static string _authorization = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ1LCJ1c2VyIjp7ImlkIjo0NSwiY3JlYXRlZFVzZXJJZCI6NCwiY3JlYXRlZERhdGUiOiIyMDIxLTA3LTE0VDA1OjMxOjM2Ljk5N1oiLCJtb2RpZmllZFVzZXJJZCI6bnVsbCwibW9kaWZpZWREYXRlIjpudWxsLCJpc0RlbGV0ZWQiOmZhbHNlLCJ2ZXJzaW9uTnVtYmVyIjoxLCJ1c2VybmFtZSI6IkMyMTczNTUiLCJlbWFpbCI6InRpYW5famllQG5ldHdvcmsubGlsbHkuY24iLCJyZWFsbmFtZSI6IkppZSBUaWFuIiwiY29tbWVudCI6bnVsbH0sInR5cGUiOiJBWlVSRSIsInN1YiI6ImIyOTRkOWVlLTU5ZjctNDIwZi04ZTllLWFjOTk0OTRiNDliYSIsImlhdCI6MTY1MjQzMjAwOSwiZXhwIjoxNjUyNDUzNjA5fQ.Wgz8yfTxHQEM24GGZjMr-ZKNiROp_do7VC5DMmo8FKk";
@@ -135,7 +135,7 @@ namespace MedicalAssurancePolicyData
             // TODO: 处理html内容，然后直接post
             //Console.WriteLine("Deleting Olumiant contents....");
             //DeleteAll("Olumiant", "normal");
-            PostContentByProductV2(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
+            //PostContentByProduct(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
             //Console.WriteLine("Deleting Taltz contents....");
             //DeleteAll("Taltz", "normal");
             //PostContentByProduct(medicalAssurancePolicies, "拓咨", "Taltz", "", "normal");
@@ -143,6 +143,10 @@ namespace MedicalAssurancePolicyData
             //Console.WriteLine("Deleting Ve contents....");
             //DeleteAll("Verzenios", "countryHealthInsurance");
             //PostContentByProduct(medicalAssurancePolicies, "唯择", "Verzenios", "true", "countryHealthInsurance");
+
+            //PostContentByProductV2(medicalAssurancePolicies, "艾乐明", "Olumiant", "", "normal");
+            //PostContentByProductV2(medicalAssurancePolicies, "拓咨", "Taltz", "", "normal");
+            PostContentByProductV2(medicalAssurancePolicies, "唯择", "Verzenios", "true", "countryHealthInsurance");
 
         }
 
@@ -508,6 +512,7 @@ namespace MedicalAssurancePolicyData
                         medicalAssurancePolicy.ReimbersmentLimit = GetCellValue(row, 14);
                         medicalAssurancePolicy.Memo = GetCellValue(row, 15);
                         medicalAssurancePolicy.HospitalizationReimbursementTreatment = GetCellValue(row, 16);
+                        medicalAssurancePolicy.IsDualChannel = GetCellValue(row, 17);
 
                         province = medicalAssurancePolicy.Province;
                         city = medicalAssurancePolicy.City;

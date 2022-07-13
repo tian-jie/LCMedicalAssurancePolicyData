@@ -45,9 +45,12 @@ namespace MedicalAssurancePolicyData
 
         public string HospitalizationReimbursementTreatment { get; set; }
 
+        public string IsDualChannel { get; set; }
+
+
         public string ToHtml()
         {
-            var htmlRateTemplate=@"
+            var htmlRateTemplate= @"
 <div style=""width: 100%;""><B>参保人群：</B>【参保人群】</div>
 <div style=""width: 100%;""><B>类别：</B>【类别】</div>
 <div style=""width: 100%;""><B>医院级别：</B>【医院级别】</div>
@@ -57,8 +60,8 @@ namespace MedicalAssurancePolicyData
 <div style=""width: 100%;""><B>起付线（元 / 年）：</B>【起付线】</div>
 <div style=""width: 100%;""><B>报销比率 / 额度区间：</B>【报销比率】</div>
 <div style=""width: 100%;""><B>报销限额（元 / 年）：</B>【报销限额】</div>
-<div style=""width: 100%;""><B>备注：</B>【备注】</div>
 <div style=""width: 100%;""><B>住院报销待遇：</B>【住院报销待遇】</div>
+<div style=""width: 100%;""><B>是否双通道：</B>【是否双通道】</div>
 <div></div> ";
 
             var htmlContent = htmlRateTemplate.Replace("【参保人群】", InsuranceCitizenType)
@@ -72,6 +75,7 @@ namespace MedicalAssurancePolicyData
                 .Replace("【报销限额】", ReimbersmentLimit)
                 .Replace("【备注】", Memo)
                 .Replace("【住院报销待遇】", HospitalizationReimbursementTreatment)
+                .Replace("【是否双通道】", IsDualChannel)
                 .ReplaceLineEndings("");
 
             return htmlContent;
